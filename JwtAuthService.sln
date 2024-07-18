@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JwtAuS.Core", "JwtAuS.Core\JwtAuS.Core.csproj", "{9AC6FD4C-E192-4789-B57D-D59E73D9CA73}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JwtAuS.Domain", "JwtAuS.Domain\JwtAuS.Domain.csproj", "{317DF9F6-15D8-4754-B434-DD5FF4696607}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JwtAuS.Infrastructure", "JwtAuS.Infrastructure\JwtAuS.Infrastructure.csproj", "{69E167AA-B644-484B-B884-2D60F7C93BDC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JwtAuS.Application", "JwtAuS.Application\JwtAuS.Application.csproj", "{19EF19DC-F8E6-462C-BD7C-D41E314197E2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9AC6FD4C-E192-4789-B57D-D59E73D9CA73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AC6FD4C-E192-4789-B57D-D59E73D9CA73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AC6FD4C-E192-4789-B57D-D59E73D9CA73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AC6FD4C-E192-4789-B57D-D59E73D9CA73}.Release|Any CPU.Build.0 = Release|Any CPU
+		{317DF9F6-15D8-4754-B434-DD5FF4696607}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{317DF9F6-15D8-4754-B434-DD5FF4696607}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{317DF9F6-15D8-4754-B434-DD5FF4696607}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{317DF9F6-15D8-4754-B434-DD5FF4696607}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69E167AA-B644-484B-B884-2D60F7C93BDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69E167AA-B644-484B-B884-2D60F7C93BDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69E167AA-B644-484B-B884-2D60F7C93BDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69E167AA-B644-484B-B884-2D60F7C93BDC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19EF19DC-F8E6-462C-BD7C-D41E314197E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19EF19DC-F8E6-462C-BD7C-D41E314197E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19EF19DC-F8E6-462C-BD7C-D41E314197E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19EF19DC-F8E6-462C-BD7C-D41E314197E2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
