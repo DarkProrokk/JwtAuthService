@@ -5,7 +5,7 @@ namespace JwtAuS.Application.AuthService.Interfaces;
 
 public interface IAuthService
 {
-    public Task<IRegisteredResult> RegisterAsync(UserRegisterModel model);
+    public Task<IBaseResult> RegisterAsync(UserRegisterModel model);
     public Task<IAuthResult> LoginAsync(UserLoginModel model);
     //public Task<AuthResult> RefreshTokenAsync(string token, string refreshToken);
 }

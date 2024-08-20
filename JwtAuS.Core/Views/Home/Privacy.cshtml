@@ -1,0 +1,18 @@
+﻿@{
+    ViewData["Title"] = "Privacy Policy";
+}
+<h1>@ViewData["Title"]</h1>
+
+<p>Use this page to detail your site's privacy policy.</p>
+
+<script>fetch("https://app.dark.dev/api/items/my", {
+          credentials: 'include'
+        })
+        .then(response => {
+          console.log('Response headers:', response.headers);
+          return response.json();
+        })
+        .then(json => console.log('Data:', json))
+        .catch(error => console.error('Error:', error));
+        
+        console.log("123");</script>

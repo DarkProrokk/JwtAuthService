@@ -1,23 +1,25 @@
 using JwtAuS.Application.AuthService;
 using JwtAuS.Application.AuthService.Interfaces;
 using JwtAuS.Infrastructure.Data.Context;
-using JwtAuS.Infrastructure.Data.Repository.Base.Interfaces;
 using JwtAuS.Infrastructure.Data.Repository.User;
 using JwtAuS.Infrastructure.Data.Repository.User.Interfaces;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.IdentityModel.Tokens;
+using Microsoft.EntityFrameworkCore;
 
 
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddScoped<IUserRepository, UserRepository >();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IAuthService, AuthService>();
-builder.Services.AddControllers();
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(corsPolicyBuilder => corsPolicyBuilder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+});
+builder.Services.AddControllersWithViews();
 
-
-builder.Services.AddDbContext<AuthContext>();
+builder.Services.AddDbContext<AuthContext>(options =>
+    options.UseNpgsql(
+        builder.Configuration.GetConnectionString("DefaultConnection")));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -32,7 +34,12 @@ app.UseHttpsRedirection();
 app.UseDefaultFiles();
 app.UseStaticFiles();
 
+app.UseCors();
 app.UseRouting();
-app.MapControllers();
+app.UseAuthentication();
+app.UseAuthorization();
 
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 app.Run();
