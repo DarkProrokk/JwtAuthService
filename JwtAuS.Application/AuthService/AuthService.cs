@@ -78,7 +78,7 @@ public class AuthService(IUserRepository userRepository) : IAuthService
     private static void PublishUserRegisteredEvent(UserRegisterRequestModel registeredEvent)
     {
         var factory = new ConnectionFactory();
-        factory.HostName = "45.84.224.207";
+        factory.HostName = "91.184.241.3";
         factory.UserName = "DarkProrok";
         factory.Password = "Sameva72";
         factory.VirtualHost = "/";
