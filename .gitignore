@@ -67,3 +67,4 @@ csx/
 .idea/
 
 JwtAuS.Core/appsettings.json
+JwtAuS.Core/appsettings.Development.jsonjson

@@ -29,7 +29,7 @@ public class AuthApiController(IAuthService authService) : ControllerBase
             Secure = true, // Это будет работать только через HTTPS
             Domain = ".dark.dev",
             Path = "/",
-            SameSite = SameSiteMode.None, // Попробуйте также Strict
+            SameSite = SameSiteMode.None,
             Expires = DateTimeOffset.UtcNow.AddHours(1)
         });
         if (result.Success) return Ok(result);

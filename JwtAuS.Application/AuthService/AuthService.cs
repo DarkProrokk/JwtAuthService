@@ -6,20 +6,22 @@ using JwtAuS.Application.AuthService.Jwt;
 using JwtAuS.Application.AuthService.Models;
 using JwtAuS.Application.AuthService.Result;
 using JwtAuS.Application.AuthService.Result.Interfaces;
+using JwtAuS.Application.QueueService.Interfaces;
 using JwtAuS.Domain.Entities;
 using JwtAuS.Infrastructure.Data.Repository.User.Interfaces;
+using Microsoft.Extensions.Configuration;
 using RabbitMQ.Client;
 using static JwtAuS.Application.AuthService.Tools.PasswordHashGenerator;
 namespace JwtAuS.Application.AuthService;
 
-public class AuthService(IUserRepository userRepository) : IAuthService
+public class AuthService(IUserRepository userRepository, IQueueService queueService, IConfiguration configuration) : IAuthService
 {
     public async Task<IBaseResult> RegisterAsync(UserRegisterModel model)
     {
         var result = await RegisterLocallyAsync(model);
         if (result.Success is false) return result;
         PublishUserRegisteredEvent(result.Model);
-        return (BaseResult)result;
+        return result;
     }
 
     private async Task<IRegisteredResult> RegisterLocallyAsync(UserRegisterModel user)
@@ -75,25 +77,12 @@ public class AuthService(IUserRepository userRepository) : IAuthService
     }
     
 
-    private static void PublishUserRegisteredEvent(UserRegisterRequestModel registeredEvent)
+    private void PublishUserRegisteredEvent(UserRegisterRequestModel registeredEvent)
     {
-        var factory = new ConnectionFactory();
-        factory.HostName = "91.184.241.3";
-        factory.UserName = "DarkProrok";
-        factory.Password = "Sameva72";
-        factory.VirtualHost = "/";
-        factory.Port = AmqpTcpEndpoint.UseDefaultPort;
-
-        using var connection = factory.CreateConnection();
-        using var channel = connection.CreateModel();
-
-        channel.QueueDeclare(queue: "user_registered", durable: false, exclusive: false, autoDelete: false,
-            arguments: null);
-
+        var queueName = configuration.GetSection("AppSettings").GetSection("RabbitAuthQueue").Value;
+        if (queueName is null) throw new NullReferenceException("RabbitAuthQueue is null");
         var messageBody = JsonSerializer.Serialize(registeredEvent);
-        var body = Encoding.UTF8.GetBytes(messageBody);
-
-        channel.BasicPublish(exchange: "", routingKey: "user_registered", basicProperties: null, body: body);
+        queueService.SendMessage(messageBody, queueName);
     }
 
     #endregion
